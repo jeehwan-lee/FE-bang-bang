@@ -5,6 +5,10 @@ module.exports = {
     {
       pattern: /text-(sm|lg|base|xl)/,
     },
+    {
+      pattern:
+        /^(text|bg)-(blue|red|gray)-(100|200|300|400|500|600|700|800|900)$/,
+    },
   ],
   theme: {
     extend: {
