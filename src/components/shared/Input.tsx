@@ -6,10 +6,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 function Input({ classNameProps, ...props }: InputProps) {
   return (
-    <input
-      {...props}
-      className={`py-2 px-4 w-full rounded-lg focus:outline-none focus:ring-2 focus:border-blue-500 ${classNameProps}`}
-    />
+    <div className="relative">
+      <input
+        {...props}
+        className={`py-2 px-2 w-full border-b-2 border-gray-200 focus:outline-none`}
+      />
+    </div>
   );
 }
 
