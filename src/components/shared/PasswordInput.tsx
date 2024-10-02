@@ -16,13 +16,13 @@ function PasswordInput({ classNameProps, ...props }: InputProps) {
       <input
         {...props}
         type={visible ? "text" : "password"}
-        className={`py-2 px-2 w-full border-b-2 border-gray-200 focus:outline-none`}
+        className={`text-base py-4 px-2 w-full border-b-2 border-gray-200 focus:outline-none`}
       />
 
       <img
         onClick={onClickVisible}
         src={visible ? "/icons/invisible.png" : "/icons/visible.png"}
-        className="w-[24px] h-[24px] absolute top-[6px] right-[10px]"
+        className="w-[24px] h-[24px] absolute top-[20px] right-[10px]"
       />
     </div>
   );
