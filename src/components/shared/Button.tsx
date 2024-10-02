@@ -9,7 +9,7 @@ function Button({ label, ...props }: ButtonProps) {
     <button
       {...props}
       type="button"
-      className={`text-white bg-blue-500 hover:bg-blue-300 font-medium rounded-lg text-xl px-5 py-4 me-2 mb-2 w-full`}
+      className={`text-white bg-blue-500 hover:bg-blue-300 font-medium rounded-lg text-xl px-5 py-3 me-2 mb-2 w-full`}
     >
       {label}
     </button>
