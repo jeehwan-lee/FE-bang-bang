@@ -14,6 +14,7 @@ import {
   expPassword,
 } from "../constants/regexp";
 import { signUp } from "../apis/signUp";
+import BackButton from "../components/shared/BackButton";
 
 interface checkInfoProps {
   account: string;
@@ -156,8 +157,10 @@ function SignUp() {
       <Flex
         direction="flex-row"
         justify="justify-center"
-        classNameProps="w-full"
+        align="items-center"
+        classNameProps="w-full relative"
       >
+        <BackButton classNameProps="absolute left-0" />
         <Text label="회원가입" color="black" size="lg" bold={true} />
       </Flex>
       <div className="h-[24px]"></div>

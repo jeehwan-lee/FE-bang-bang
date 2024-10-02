@@ -10,6 +10,7 @@ import { login } from "../apis/login";
 import { LoginInfo } from "../models/user";
 import AlertText from "../components/shared/AlertText";
 import axios from "axios";
+import BackButton from "../components/shared/BackButton";
 
 function Login() {
   const navigate = useNavigate();
@@ -44,7 +45,14 @@ function Login() {
 
   return (
     <Flex direction="flex-col" justify="justify-start" classNameProps="h-full">
-      <div className="h-[100px]"></div>
+      <Flex
+        direction="flex-col"
+        justify="justify-start"
+        classNameProps="w-full"
+      >
+        <BackButton />
+      </Flex>
+      <div className="h-[40px]"></div>
       <Flex
         direction="flex-row"
         justify="justify-center"
