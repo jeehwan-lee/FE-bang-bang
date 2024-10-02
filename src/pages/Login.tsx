@@ -1,5 +1,4 @@
 import React, { KeyboardEvent, useState } from "react";
-import Spacing from "../components/shared/Spacing";
 import Flex from "../components/shared/Flex";
 import { Link, useNavigate } from "react-router-dom";
 import Text from "../components/shared/Text";

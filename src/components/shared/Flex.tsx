@@ -19,7 +19,7 @@ function Flex({
   return (
     <div
       className={`flex ${justify ? justify : "justify-between"} ${
-        align ? align : "items-center"
+        align ? align : ""
       }
        ${direction} ${classNameProps}`}
       {...props}
