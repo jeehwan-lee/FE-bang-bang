@@ -6,12 +6,20 @@ import { useSetRecoilState } from "recoil";
 import Input from "../components/shared/Input";
 import Button from "../components/shared/Button";
 import PasswordInput from "../components/shared/PasswordInput";
+import { login } from "../apis/login";
+import { LoginInfo } from "../models/user";
+import AlertText from "../components/shared/AlertText";
+import axios from "axios";
 
 function Login() {
-  const [loginInfo, setLoginInfo] = useState<any>({
+  const navigate = useNavigate();
+
+  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     account: "",
     password: "",
   });
+
+  const [validMessage, setValidMessage] = useState<string>("");
 
   const onChange = (e: { target: { name: any; value: any } }) => {
     setLoginInfo({ ...loginInfo, [e.target.name]: e.target.value });
@@ -24,7 +32,14 @@ function Login() {
   };
 
   const onSubmit = async () => {
-    console.log("ddd");
+    const result = await login(loginInfo);
+
+    if (!result) {
+      setValidMessage("올바르지 않은 아이디 또는 비밀번호입니다.");
+      return;
+    }
+
+    navigate("/main");
   };
 
   return (
@@ -41,7 +56,7 @@ function Login() {
       <Input
         placeholder="아이디"
         name="account"
-        value={loginInfo.email}
+        value={loginInfo.account}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
@@ -54,20 +69,7 @@ function Login() {
         onKeyDown={onKeyDown}
       />
       <div className="h-[22px]"></div>
-      <Flex
-        direction="flex-row"
-        justify="justify-start"
-        align="items-center"
-        classNameProps="w-full"
-      >
-        <img src="/icons/alert.png" className="w-[20px] h-[20px]" />
-        <div className="w-[6px]"></div>
-        <Text
-          label="올바르지 않은 아이디 또는 비밀번호입니다."
-          color="red"
-          size="base"
-        />
-      </Flex>
+      {validMessage !== "" && <AlertText alertLabel={validMessage} />}
       <div className="h-[36px]"></div>
       <Button label="로그인" onClick={() => onSubmit()} />
     </Flex>
