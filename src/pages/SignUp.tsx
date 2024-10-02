@@ -200,11 +200,10 @@ function SignUp() {
       <div className="h-[24px]"></div>
       <Text label="비밀번호" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
-      <Input
+      <PasswordInput
         placeholder="8자 이상 영문 소문자, 숫자, 특수문자 조합"
         name="password"
         value={signUpInfo.password}
-        type="password"
         onChange={onChange}
       />
       <div className="h-[10px]"></div>
@@ -214,11 +213,10 @@ function SignUp() {
       <div className="h-[24px]"></div>
       <Text label="비밀번호 확인" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
-      <Input
+      <PasswordInput
         placeholder="비밀번호를 재입력하세요"
         name="passwordCheck"
         value={signUpInfo.passwordCheck}
-        type="password"
         onChange={onChange}
       />
       <div className="h-[10px]"></div>

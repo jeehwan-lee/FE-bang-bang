@@ -50,7 +50,7 @@ function Login() {
         justify="justify-center"
         classNameProps="w-full"
       >
-        <Text label="로그인" color="black" size="xl" bold={true} />
+        <Text label="로그인" color="gray-800" size="xl" bold={true} />
       </Flex>
       <div className="h-[36px]"></div>
       <Input

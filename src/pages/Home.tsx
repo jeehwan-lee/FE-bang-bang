@@ -28,10 +28,10 @@ function Home() {
           justify="justify-center"
           classNameProps="w-full"
         >
-          <Text label="아직 계정이 없으신가요?" size="lg" color="blue-100" />
+          <Text label="아직 계정이 없으신가요?" size="base" color="gray-500" />
           <div className="w-[12px]"></div>
           <Link to="/signUp">
-            <Text label="회원가입" size="lg" color="blue-100" />
+            <Text label="회원가입" size="base" bold={true} color="blue-400" />
           </Link>
         </Flex>
       </Flex>

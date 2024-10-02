@@ -7,7 +7,7 @@ interface ImageSquareProps {
 function ImageSquare({ imageUrl }: ImageSquareProps) {
   return (
     <>
-      <img className="w-full h-auto" src={imageUrl} />
+      <img className="w-full h-auto px-4" src={imageUrl} />
     </>
   );
 }
