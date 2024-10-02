@@ -12,13 +12,9 @@ function Home() {
     navigate("/login");
   };
   return (
-    <Flex
-      direction="flex-col"
-      justify="justify-between"
-      classNameProps="h-full"
-    >
+    <Flex direction="flex-col" justify="justify-center" classNameProps="h-full">
       <div className="h-[50px]"></div>
-      <ImageSquare imageUrl="/Project_Thumbnail.png" />
+      <ImageSquare imageUrl="/images/project_thumbnail.png" />
       <div className="h-[320px]"></div>
       <Flex
         direction="flex-col"

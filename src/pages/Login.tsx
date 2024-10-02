@@ -5,10 +5,11 @@ import Text from "../components/shared/Text";
 import { useSetRecoilState } from "recoil";
 import Input from "../components/shared/Input";
 import Button from "../components/shared/Button";
+import PasswordInput from "../components/shared/PasswordInput";
 
 function Login() {
   const [loginInfo, setLoginInfo] = useState<any>({
-    email: "",
+    account: "",
     password: "",
   });
 
@@ -27,35 +28,34 @@ function Login() {
   };
 
   return (
-    <div className="my-auto">
-      <Text label="로그인" color="black" size="xl" bold={true} />
-      <div className="h-[24px]"></div>
+    <Flex direction="flex-col" justify="justify-center" classNameProps="h-full">
+      <Flex
+        direction="flex-row"
+        justify="justify-center"
+        classNameProps="w-full"
+      >
+        <Text label="로그인" color="black" size="xl" bold={true} />
+      </Flex>
+
+      <div className="h-[50px]"></div>
       <Input
-        placeholder="이메일"
-        name="email"
+        placeholder="아이디"
+        name="account"
         value={loginInfo.email}
         onChange={onChange}
         onKeyDown={onKeyDown}
       />
-      <div className="h-[24px]"></div>
-      <Input
+      <div className="h-[40px]"></div>
+      <PasswordInput
         placeholder="비밀번호"
         name="password"
         value={loginInfo.password}
         onChange={onChange}
-        type="password"
         onKeyDown={onKeyDown}
       />
       <div className="h-[24px]"></div>
       <Button label="로그인" onClick={() => onSubmit()} />
-      <div className="h-[10px]"></div>
-      <Flex direction="flex-row">
-        <Text label="아직 계정이 없으신가요?" color="gray-400" size="base" />
-        <Link to="/signUp">
-          <Text label="회원가입" color="gray-600" size="base" />
-        </Link>
-      </Flex>
-    </div>
+    </Flex>
   );
 }
 
