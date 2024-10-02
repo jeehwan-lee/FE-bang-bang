@@ -15,7 +15,7 @@ function AlertText({ alertLabel }: AlertTextProps) {
     >
       <img src="/icons/alert.png" className="w-[20px] h-[20px]" />
       <div className="w-[6px]"></div>
-      <Text label={alertLabel} color="red" size="base" />
+      <Text label={alertLabel} color="red" size="sm" />
     </Flex>
   );
 }

@@ -6,57 +6,85 @@ import PasswordInput from "../components/shared/PasswordInput";
 import { useNavigate } from "react-router-dom";
 import Button from "../components/shared/Button";
 import AlertText from "../components/shared/AlertText";
+import { SignUpInfo } from "../models/user";
+import {
+  expAccount,
+  expEmail,
+  expNickname,
+  expPassword,
+} from "../constants/regexp";
+import { signUp } from "../apis/signUp";
 
-interface existCheckProps {
+interface checkInfoProps {
+  account: string;
   email: string;
-  name: string;
+  nickname: string;
+  password: string;
+  passwordCheck: string;
 }
 
 function SignUp() {
   const navigate = useNavigate();
 
-  const [signUpInfo, setSignUpInfo] = useState<any>({
+  const [signUpInfo, setSignUpInfo] = useState<SignUpInfo>({
     account: "",
     email: "",
     password: "",
     passwordCheck: "",
-    name: "",
+    nickname: "",
   });
 
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const [existCheck, setExistCheck] = useState<existCheckProps>({
-    email: "이메일 중복확인을 해주세요",
-    name: "닉네임 중복확인을 해주세요",
+  const [validCheck, setValidCheck] = useState<checkInfoProps>({
+    account: "",
+    email: "",
+    nickname: "",
+    password: "",
+    passwordCheck: "",
   });
 
-  useEffect(() => {
-    setExistCheck({ ...existCheck, email: "이메일 중복확인을 해주세요" });
-  }, [signUpInfo.email]);
-
-  useEffect(() => {
-    setExistCheck({ ...existCheck, name: "닉네임 중복확인을 해주세요" });
-  }, [signUpInfo.name]);
-
   const isValidSignUpInfo = () => {
-    /*
+    let isValid = true;
+
+    let newErrors = {
+      account: "",
+      email: "",
+      nickname: "",
+      password: "",
+      passwordCheck: "",
+    };
+
+    if (expNickname.test(signUpInfo.nickname) === false) {
+      newErrors.nickname =
+        "닉네임은 4~10자의 한글, 영문 대소문자와 숫자만 가능합니다.";
+      isValid = false;
+    }
+
+    if (expAccount.test(signUpInfo.account) === false) {
+      newErrors.account =
+        "아이디는 15자 이하의 영문 소문자와 숫자만 가능합니다.";
+      isValid = false;
+    }
+
     if (expEmail.test(signUpInfo.email) === false) {
-      return "이메일 형식을 확인하세요";
+      newErrors.email = "이메일 형식에 맞게 입력해주세요.";
+      isValid = false;
     }
 
     if (expPassword.test(signUpInfo.password) === false) {
-      return "비밀번호는 문자, 숫자, 특수문자 포함 8~20자리입니다";
+      newErrors.password =
+        "8자리 이상의 영문 소문자, 숫자, 특수문자로 조합해주세요.";
+      isValid = false;
     }
 
     if (signUpInfo.password !== signUpInfo.passwordCheck) {
-      return "비밀번호가 일치하지 않습니다";
+      newErrors.passwordCheck = "비밀번호가 일치하지 않습니다";
+      isValid = false;
     }
 
-    if (expName.test(signUpInfo.name) === false) {
-      return "닉네임은 4자이상 8자이하입니다";
-    }*/
-
-    return "";
+    setValidCheck(newErrors);
+    return isValid;
   };
 
   const onChange = (e: { target: { name: any; value: any } }) => {
@@ -77,37 +105,40 @@ function SignUp() {
     } */
   };
 
-  const nameCheck = async () => {
+  const nickname = async () => {
     /*
-    const result = await checkUserNameExist(signUpInfo.name);
+    const result = await checkUserNameExist(signUpInfo.nickname);
 
     if (result) {
       // 중복된 이메일이 있는 경우
       alert("이미 존재하는 닉네임입니다.");
-      setSignUpInfo({ ...signUpInfo, name: "" });
+      setSignUpInfo({ ...signUpInfo, nickname: "" });
     } else {
       alert("사용 가능한 닉네임입니다");
-      setExistCheck({ ...existCheck, name: "" });
+      setExistCheck({ ...existCheck, nickname: "" });
     } */
   };
 
   const onSubmit = async () => {
-    if (isValidSignUpInfo() !== "") {
-      setErrorMessage(isValidSignUpInfo());
+    if (!isValidSignUpInfo()) {
       return;
     }
 
-    setErrorMessage("");
+    console.log(signUpInfo);
 
-    if (existCheck.email !== "") {
-      alert(existCheck.email);
-      return;
-    }
+    const response = await signUp(signUpInfo);
 
-    if (existCheck.name !== "") {
-      alert(existCheck.name);
-      return;
-    }
+    navigate("/completeSignUp");
+
+    // if (existCheck.email !== "") {
+    //   alert(existCheck.email);
+    //   return;
+    // }
+
+    // if (existCheck.nickname !== "") {
+    //   alert(existCheck.nickname);
+    //   return;
+    // }
 
     //const response = await signUp(signUpInfo);
 
@@ -117,7 +148,7 @@ function SignUp() {
       return;
     } */
 
-    navigate("/login");
+    // navigate("/completeSignUp");
   };
 
   return (
@@ -134,12 +165,14 @@ function SignUp() {
       <div className="h-[10px]"></div>
       <Input
         placeholder="4~10자 한글, 영문 대소문자, 숫자"
-        name="name"
-        value={signUpInfo.name}
+        name="nickname"
+        value={signUpInfo.nickname}
         onChange={onChange}
       />
       <div className="h-[10px]"></div>
-      <AlertText alertLabel="이미 존재하는 닉네임입니다." />
+      {validCheck.nickname !== "" && (
+        <AlertText alertLabel={validCheck.nickname} />
+      )}
       <div className="h-[24px]"></div>
       <Text label="아이디" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
@@ -150,7 +183,9 @@ function SignUp() {
         onChange={onChange}
       />
       <div className="h-[10px]"></div>
-      <AlertText alertLabel="이미 존재하는 아이디입니다." />
+      {validCheck.account !== "" && (
+        <AlertText alertLabel={validCheck.account} />
+      )}
       <div className="h-[24px]"></div>
       <Text label="이메일" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
@@ -161,7 +196,7 @@ function SignUp() {
         onChange={onChange}
       />
       <div className="h-[10px]"></div>
-      <AlertText alertLabel="이미 가입된 이메일입니다." />
+      {validCheck.email !== "" && <AlertText alertLabel={validCheck.email} />}
       <div className="h-[24px]"></div>
       <Text label="비밀번호" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
@@ -172,6 +207,10 @@ function SignUp() {
         type="password"
         onChange={onChange}
       />
+      <div className="h-[10px]"></div>
+      {validCheck.password !== "" && (
+        <AlertText alertLabel={validCheck.password} />
+      )}
       <div className="h-[24px]"></div>
       <Text label="비밀번호 확인" bold={true} color="black" size="base" />
       <div className="h-[10px]"></div>
@@ -183,7 +222,9 @@ function SignUp() {
         onChange={onChange}
       />
       <div className="h-[10px]"></div>
-      <AlertText alertLabel="비밀번호가 일치하지 않습니다" />
+      {validCheck.passwordCheck !== "" && (
+        <AlertText alertLabel={validCheck.passwordCheck} />
+      )}
       <div className="h-[24px]"></div>
       <Button label="가입 완료" onClick={() => onSubmit()} />
     </Flex>
