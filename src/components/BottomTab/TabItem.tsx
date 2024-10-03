@@ -5,8 +5,9 @@ import Text from "../shared/Text";
 interface TabItemProps {
   label: string;
   children: React.ReactNode;
+  color: string;
 }
-function TabItem({ children, label }: TabItemProps) {
+function TabItem({ children, label, color }: TabItemProps) {
   return (
     <Flex
       direction="flex-col"
@@ -16,7 +17,7 @@ function TabItem({ children, label }: TabItemProps) {
     >
       {children}
       <div className="h-[6px]"></div>
-      <Text label={label} size="base" color="blue-400" />
+      <Text label={label} size="base" color={color} />
     </Flex>
   );
 }

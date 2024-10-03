@@ -25,18 +25,39 @@ function BottomTab() {
         classNameProps="w-full px-10"
       >
         <Link to="/diary">
-          <TabItem label="수첩">
-            <NoteIcon height="30px" width="30px" />
+          <TabItem
+            label="수첩"
+            color={location === "/diary" ? "blue-500" : "gray-500"}
+          >
+            <NoteIcon
+              height="30px"
+              width="30px"
+              stroke={location === "/diary" ? "#5a71c7" : "#93949d"}
+            />
           </TabItem>
         </Link>
         <Link to="/home">
-          <TabItem label="홈">
-            <HomeIcon height="30px" width="30px" />
+          <TabItem
+            label="홈"
+            color={location === "/home" ? "blue-500" : "gray-500"}
+          >
+            <HomeIcon
+              height="30px"
+              width="30px"
+              stroke={location === "/home" ? "#5a71c7" : "#93949d"}
+            />
           </TabItem>
         </Link>
         <Link to="/myPage">
-          <TabItem label="마이">
-            <UserIcon height="30px" width="30px" />
+          <TabItem
+            label="마이"
+            color={location === "/myPage" ? "blue-500" : "gray-500"}
+          >
+            <UserIcon
+              height="30px"
+              width="30px"
+              fill={location === "/myPage" ? "#5a71c7" : "#93949d"}
+            />
           </TabItem>
         </Link>
       </Flex>
