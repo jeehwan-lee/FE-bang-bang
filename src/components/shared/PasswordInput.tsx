@@ -21,7 +21,7 @@ function PasswordInput({ classNameProps, ...props }: InputProps) {
 
       <img
         onClick={onClickVisible}
-        src={visible ? "/icons/invisible.png" : "/icons/visible.png"}
+        src={visible ? "/icons/invisible.svg" : "/icons/visible.svg"}
         className="w-[24px] h-[24px] absolute top-[20px] right-[10px] hover:cursor-pointer"
       />
     </div>

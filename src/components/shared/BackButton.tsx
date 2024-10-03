@@ -15,7 +15,7 @@ function BackButton({ classNameProps }: BackButtonProps) {
     <>
       <img
         onClick={onClickBackButton}
-        src="/icons/chevronLeft.png"
+        src="/icons/chevron-left.svg"
         className={`${classNameProps} w-[20px] h-[20px] hover:cursor-pointer`}
       />
     </>
