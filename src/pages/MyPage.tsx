@@ -1,12 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import Flex from "../components/shared/Flex";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../store/atom/user";
 import ProfileImage from "../components/myPage/ProfileImage";
 import Text from "../components/shared/Text";
+import TabButton from "../components/shared/TabButton";
 
 function MyPage() {
   const user = useRecoilValue(userAtom);
+
+  const [activeTab, setActiveTab] = useState("tab1"); // 기본 활성 탭 설정
+
+  const onClickTabButton = () => {
+    if (activeTab == "tab1") {
+      setActiveTab("tab2");
+    } else {
+      setActiveTab("tab1");
+    }
+  };
 
   return (
     <Flex
@@ -15,7 +26,7 @@ function MyPage() {
       align="items-center"
       classNameProps="h-full"
     >
-      <div className="h-[100px]"></div>
+      <div className="h-[70px]"></div>
       <ProfileImage profileUrl={user?.photoUrl as string} />
       <div className="h-[10px]"></div>
       <Text
@@ -45,7 +56,22 @@ function MyPage() {
         </Flex>
       </Flex>
       <div className="h-[50px]"></div>
-      <div>hello</div>
+      <Flex
+        direction="flex-row"
+        justify="justify-center"
+        classNameProps="w-full border-b"
+      >
+        <TabButton
+          label="참여중인 코스"
+          active={activeTab === "tab1"}
+          onClickTab={() => onClickTabButton()}
+        />
+        <TabButton
+          label="완주한 코스"
+          active={activeTab === "tab2"}
+          onClickTab={() => onClickTabButton()}
+        />
+      </Flex>
     </Flex>
   );
 }
