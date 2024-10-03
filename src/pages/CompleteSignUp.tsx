@@ -23,7 +23,7 @@ function CompleteSignUp() {
         justify="justify-center"
         classNameProps="w-full"
       >
-        <Text label="회원가입 완료" bold={true} size="lg" color="blue-100" />
+        <Text label="회원가입 완료" bold={true} size="lg" color="gray-800" />
       </Flex>
       <div className="h-[40px]"></div>
       <div className="relative">
@@ -37,9 +37,9 @@ function CompleteSignUp() {
             label={`${user?.nickname}님`}
             bold={true}
             size="lg"
-            color="blue-100"
+            color="gray-800"
           />
-          <Text label="환영합니다!" bold={true} size="lg" color="blue-100" />
+          <Text label="환영합니다!" bold={true} size="lg" color="gray-800" />
         </Flex>
         <ImageSquare imageUrl="/images/complete_signup_thumbnail.png" />
       </div>
