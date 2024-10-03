@@ -20,6 +20,8 @@ import {
   signUp,
 } from "../apis/signUp";
 import BackButton from "../components/shared/BackButton";
+import { useSetRecoilState } from "recoil";
+import { userAtom } from "../store/atom/user";
 
 interface checkInfoProps {
   account: string;
@@ -30,6 +32,8 @@ interface checkInfoProps {
 }
 
 function SignUp() {
+  const setUser = useSetRecoilState(userAtom);
+
   const navigate = useNavigate();
 
   const [signUpInfo, setSignUpInfo] = useState<SignUpInfo>({
@@ -148,6 +152,8 @@ function SignUp() {
       alert("회원가입 중 에러가 발생했습니다.");
       return;
     }
+
+    setUser(response);
 
     navigate("/completeSignUp");
   };

@@ -4,8 +4,12 @@ import Flex from "../components/shared/Flex";
 import ImageSquare from "../components/shared/ImageSquare";
 import Button from "../components/shared/Button";
 import Text from "../components/shared/Text";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../store/atom/user";
 
 function CompleteSignUp() {
+  const user = useRecoilValue(userAtom);
+
   const navigate = useNavigate();
 
   const onClickStartBtn = () => {
@@ -29,7 +33,12 @@ function CompleteSignUp() {
           align="items-center"
           classNameProps="h-full absolute w-full"
         >
-          <Text label="김포텐님" bold={true} size="lg" color="blue-100" />
+          <Text
+            label={`${user?.nickname}님`}
+            bold={true}
+            size="lg"
+            color="blue-100"
+          />
           <Text label="환영합니다!" bold={true} size="lg" color="blue-100" />
         </Flex>
         <ImageSquare imageUrl="/images/complete_signup_thumbnail.png" />
