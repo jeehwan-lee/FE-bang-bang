@@ -8,16 +8,18 @@ import CompleteSignUp from "./pages/CompleteSignUp";
 import Main from "./pages/Main";
 import MyPage from "./pages/MyPage";
 import Diary from "./pages/Diary";
+import PrivateRoute from "./components/auth/PrivateRoute";
+import BottomTab from "./components/BottomTab/BottomTab";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <main className="p-8 pb-[70px] h-full">
+        <main className="p-8 pb-[70px] h-full relative">
           <div className="h-full">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/main" element={<Main />} />
+              <Route path="/" element={<Main />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/diary" element={<Diary />} />
               <Route path="/myPage" element={<MyPage />} />
               <Route path="/login" element={<Login />} />
@@ -25,6 +27,7 @@ function App() {
               <Route path="/completeSignUp" element={<CompleteSignUp />} />
             </Routes>
           </div>
+          <BottomTab />
         </main>
       </BrowserRouter>
     </>
