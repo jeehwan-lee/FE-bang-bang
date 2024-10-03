@@ -13,7 +13,12 @@ import {
   expNickname,
   expPassword,
 } from "../constants/regexp";
-import { signUp } from "../apis/signUp";
+import {
+  checkAccountExist,
+  checkEmailExist,
+  checkNicknameExist,
+  signUp,
+} from "../apis/signUp";
 import BackButton from "../components/shared/BackButton";
 
 interface checkInfoProps {
@@ -45,7 +50,7 @@ function SignUp() {
     passwordCheck: "",
   });
 
-  const isValidSignUpInfo = () => {
+  const isValidSignUpInfo = async () => {
     let isValid = true;
 
     let newErrors = {
@@ -56,30 +61,66 @@ function SignUp() {
       passwordCheck: "",
     };
 
-    if (expNickname.test(signUpInfo.nickname) === false) {
+    try {
+      const nicknameExistCheck = await checkNicknameExist(signUpInfo.nickname);
+    } catch (e) {
+      newErrors.nickname = "중복된 닉네임입니다.";
+      isValid = false;
+    }
+
+    if (
+      signUpInfo.nickname.trim().length == 0 ||
+      expNickname.test(signUpInfo.nickname) === false
+    ) {
       newErrors.nickname =
         "닉네임은 4~10자의 한글, 영문 대소문자와 숫자만 가능합니다.";
       isValid = false;
     }
 
-    if (expAccount.test(signUpInfo.account) === false) {
+    try {
+      const accountExistCheck = await checkAccountExist(signUpInfo.account);
+    } catch (e) {
+      newErrors.account = "이미 존재하는 아이디입니다.";
+      isValid = false;
+    }
+
+    if (
+      signUpInfo.account.trim().length == 0 ||
+      expAccount.test(signUpInfo.account) === false
+    ) {
       newErrors.account =
         "아이디는 15자 이하의 영문 소문자와 숫자만 가능합니다.";
       isValid = false;
     }
 
-    if (expEmail.test(signUpInfo.email) === false) {
+    try {
+      const emailExistCheck = await checkEmailExist(signUpInfo.email);
+    } catch (e) {
+      newErrors.email = "이미 가입된 이메일입니다.";
+      isValid = false;
+    }
+
+    if (
+      signUpInfo.email.trim().length == 0 ||
+      expEmail.test(signUpInfo.email) === false
+    ) {
       newErrors.email = "이메일 형식에 맞게 입력해주세요.";
       isValid = false;
     }
 
-    if (expPassword.test(signUpInfo.password) === false) {
+    if (
+      signUpInfo.password.trim().length == 0 ||
+      expPassword.test(signUpInfo.password) === false
+    ) {
       newErrors.password =
         "8자리 이상의 영문 소문자, 숫자, 특수문자로 조합해주세요.";
       isValid = false;
     }
 
-    if (signUpInfo.password !== signUpInfo.passwordCheck) {
+    if (
+      signUpInfo.passwordCheck.trim().length == 0 ||
+      signUpInfo.password !== signUpInfo.passwordCheck
+    ) {
       newErrors.passwordCheck = "비밀번호가 일치하지 않습니다";
       isValid = false;
     }
@@ -92,64 +133,23 @@ function SignUp() {
     setSignUpInfo({ ...signUpInfo, [e.target.name]: e.target.value });
   };
 
-  const emailCheck = async () => {
-    /*
-  /const result = await checkUserEmailExist(signUpInfo.email);
-
-    if (result) {
-      // 중복된 이메일이 있는 경우
-      alert("이미 존재하는 이메일입니다.");
-      setSignUpInfo({ ...signUpInfo, email: "" });
-    } else {
-      alert("사용 가능한 이메일입니다");
-      setExistCheck({ ...existCheck, email: "" });
-    } */
-  };
-
-  const nickname = async () => {
-    /*
-    const result = await checkUserNameExist(signUpInfo.nickname);
-
-    if (result) {
-      // 중복된 이메일이 있는 경우
-      alert("이미 존재하는 닉네임입니다.");
-      setSignUpInfo({ ...signUpInfo, nickname: "" });
-    } else {
-      alert("사용 가능한 닉네임입니다");
-      setExistCheck({ ...existCheck, nickname: "" });
-    } */
-  };
-
   const onSubmit = async () => {
-    if (!isValidSignUpInfo()) {
+    const validCheckSignUpInfoResult = await isValidSignUpInfo();
+
+    if (!validCheckSignUpInfoResult) {
       return;
     }
 
-    console.log(signUpInfo);
-
     const response = await signUp(signUpInfo);
 
-    navigate("/completeSignUp");
+    console.log(response);
 
-    // if (existCheck.email !== "") {
-    //   alert(existCheck.email);
-    //   return;
-    // }
-
-    // if (existCheck.nickname !== "") {
-    //   alert(existCheck.nickname);
-    //   return;
-    // }
-
-    //const response = await signUp(signUpInfo);
-
-    /*
     if (!response) {
       alert("회원가입 중 에러가 발생했습니다.");
       return;
-    } */
+    }
 
-    // navigate("/completeSignUp");
+    navigate("/completeSignUp");
   };
 
   return (

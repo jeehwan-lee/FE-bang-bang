@@ -11,3 +11,24 @@ export const signUp = async (signUpInfo: SignUpInfo) => {
     console.log(e);
   }
 };
+
+export const checkAccountExist = async (account: string) => {
+  const { data } = await defaultInstance.get(
+    `/user/validate?account=${account}&email=&nickname=`
+  );
+  return data;
+};
+
+export const checkEmailExist = async (email: string) => {
+  const { data } = await defaultInstance.get(
+    `/user/validate?email=${email}&nickname=&account=`
+  );
+  return data;
+};
+
+export const checkNicknameExist = async (nickname: string) => {
+  const { data } = await defaultInstance.get(
+    `/user/validate?nickname=${nickname}&account=&email=`
+  );
+  return data;
+};
