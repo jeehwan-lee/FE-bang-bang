@@ -5,11 +5,12 @@ import Text from "../shared/Text";
 interface CourseImageProps {
   count: string;
   label: string;
+  courseImageUrl: string;
 }
-function CourseImage({ count, label }: CourseImageProps) {
+function CourseImage({ count, label, courseImageUrl }: CourseImageProps) {
   return (
     <div className="relative px-1 py-2">
-      <ImageSquare imageUrl="/images/testImage.jpg" />
+      <ImageSquare imageUrl={courseImageUrl} />
       <div className="absolute top-[12px] right-[12px]">
         <Text label={`${count}개`} color="white" size="sm" />
       </div>
