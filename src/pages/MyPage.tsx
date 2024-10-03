@@ -5,6 +5,10 @@ import { userAtom } from "../store/atom/user";
 import ProfileImage from "../components/myPage/ProfileImage";
 import Text from "../components/shared/Text";
 import TabButton from "../components/shared/TabButton";
+import { Swiper, SwiperSlide } from "swiper/react";
+import ImageSquare from "../components/shared/ImageSquare";
+import CourseImage from "../components/myPage/CourseImage";
+import "swiper/css";
 
 function MyPage() {
   const user = useRecoilValue(userAtom);
@@ -72,6 +76,24 @@ function MyPage() {
           onClickTab={() => onClickTabButton()}
         />
       </Flex>
+      {activeTab === "tab1" ? (
+        <Swiper className="w-full" slidesPerView={2}>
+          <SwiperSlide>
+            <CourseImage count="4" label="돌과 바람의 길" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CourseImage count="4" label="돌과 바람의 길" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CourseImage count="4" label="돌과 바람의 길" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <CourseImage count="4" label="돌과 바람의 길" />
+          </SwiperSlide>
+        </Swiper>
+      ) : (
+        <div>he2</div>
+      )}
     </Flex>
   );
 }
