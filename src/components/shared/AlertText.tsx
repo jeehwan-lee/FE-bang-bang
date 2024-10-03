@@ -1,6 +1,7 @@
 import React from "react";
 import Flex from "./Flex";
 import Text from "./Text";
+import { ReactComponent as Alert } from "../../icons/alert.svg";
 
 interface AlertTextProps {
   alertLabel: string;
@@ -15,7 +16,7 @@ function AlertText({ alertLabel }: AlertTextProps) {
         align="items-center"
         classNameProps="w-full"
       >
-        <img src="/icons/alert.png" className="w-[20px] h-[20px]" />
+        <Alert fill="#e00512" />
         <div className="w-[6px]"></div>
         <Text label={alertLabel} color="red-400" size="sm" />
       </Flex>

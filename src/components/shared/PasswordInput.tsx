@@ -1,4 +1,6 @@
 import React, { InputHTMLAttributes, useState } from "react";
+import visibleIcon from "../../icons/visible.svg";
+import invisibleIcon from "../../icons/invisible.svg";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   classNameProps?: string;
@@ -21,7 +23,7 @@ function PasswordInput({ classNameProps, ...props }: InputProps) {
 
       <img
         onClick={onClickVisible}
-        src={visible ? "/icons/invisible.svg" : "/icons/visible.svg"}
+        src={visible ? visibleIcon : invisibleIcon}
         className="w-[24px] h-[24px] absolute top-[20px] right-[10px] hover:cursor-pointer"
       />
     </div>
