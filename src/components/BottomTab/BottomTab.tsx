@@ -17,7 +17,7 @@ function BottomTab() {
   }
 
   return (
-    <div className="fixed -translate-x-[30px] bg-white w-[500px] h-[100px] bottom-0 border-t-2 mx-auto">
+    <div className="fixed -translate-x-[32px] bg-white w-[500px] h-[100px] bottom-0 border-t-2 mx-auto">
       <div className="h-[20px]"></div>
       <Flex
         direction="flex-row"
