@@ -11,10 +11,10 @@ function CourseImage({ count, label, courseImageUrl }: CourseImageProps) {
   return (
     <div className="relative px-1 py-2">
       <ImageSquare imageUrl={courseImageUrl} />
-      <div className="absolute top-[12px] right-[12px]">
+      <div className="absolute top-[20px] right-[16px]">
         <Text label={`${count}개`} color="white" size="sm" />
       </div>
-      <div className="absolute bottom-[16px] right-[12px]">
+      <div className="absolute bottom-[16px] right-[16px]">
         <Text label={label} color="white" size="sm" />
       </div>
     </div>

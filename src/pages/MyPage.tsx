@@ -10,10 +10,9 @@ import ImageSquare from "../components/shared/ImageSquare";
 import CourseImage from "../components/myPage/CourseImage";
 import "swiper/css";
 import { ReactComponent as FootPrintIcon } from "../icons/footprint.svg";
-import { ReactComponent as AlarmIcon } from "../icons/alarm.svg";
-import { ReactComponent as MenuIcon } from "../icons/menu.svg";
 
 import CourseItem from "../components/myPage/CourseItem";
+import Navbar from "../components/shared/Navbar";
 
 function MyPage() {
   const user = useRecoilValue(userAtom);
@@ -35,11 +34,7 @@ function MyPage() {
       align="items-center"
       classNameProps="h-full"
     >
-      <Flex direction="flex-row" justify="justify-end" classNameProps="w-full">
-        <AlarmIcon width="30px" height="30px" fill="#171719" />
-        <div className="w-[20px]"></div>
-        <MenuIcon width="30px" height="30px" fill="#171719" />
-      </Flex>
+      <Navbar />
       <div className="h-[50px]"></div>
       <ProfileImage profileUrl={user?.photoUrl as string} />
       <div className="h-[10px]"></div>
