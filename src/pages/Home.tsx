@@ -8,8 +8,11 @@ import CourseItem from "../components/myPage/CourseItem";
 import CourseImage from "../components/myPage/CourseImage";
 import RecommendCourseItem from "../components/home/RecommendCourseItem";
 import RecommendCourseImage from "../components/home/RecommendCourseImage";
+import DropDownButton from "../components/shared/DropDownButton";
 
 function Home() {
+  const options = ["전체보기", "진행중"];
+
   return (
     <Flex
       direction="flex-col"
@@ -52,7 +55,8 @@ function Home() {
           size="lg"
           bold={true}
         />
-        <Text label="전체보기" color="gray-900" size="base" bold={true} />
+
+        <DropDownButton options={options} onSelect={() => console.log("eee")} />
       </Flex>
       <div className="h-[10px]"></div>
       <Flex
